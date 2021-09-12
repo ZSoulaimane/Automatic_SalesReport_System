@@ -1,0 +1,45 @@
+version: '2.1'
+services:
+    postgres:
+        image: postgres:9.6
+        environment:
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+    mysql:
+
+        image: mysql:5.7.27
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+        volumes:
+            - ./op_files:/var/lib/mysql-files/
+            - ./mysql.cnf:/etc/mysql/mysql.cnf    
+    webserver:
+        image: puckel/docker-airflow:1.10.9
+        restart: always
+        depends_on:
+            - postgres
+            - mysql
+        environment:
+            - INSTALL_MYSQL=y
+            - LOAD_EX=n
+            - EXECUTOR=Local
+            - AIRFLOW__SMTP__SMTP_HOST=smtp.gmail.com
+            - AIRFLOW__SMTP__SMTP_USER=zar.soulaimane@gmail.com
+            - AIRFLOW__SMTP__SMTP_PASSWORD=soulaimanezarriaxx
+            - AIRFLOW__SMTP__SMTP_PORT=587
+            - AIRFLOW__SMTP__SMTP_MAIL_FROM=Airflow
+        volumes:
+            - ./dags:/usr/local/airflow/dags
+            - ./ip_files:/usr/local/airflow/ip_files
+            - ./op_files:/usr/local/airflow/op_files
+            # Uncomment to include custom plugins
+            # - ./plugins:/usr/local/airflow/plugins
+        ports:
+            - "8080:8080"
+        command: webserver
+        healthcheck:
+            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
