@@ -125,3 +125,13 @@ You can also use this to run a bash shell or any other command in the same envir
 # Wanna help?
 
 Fork, improve and PR. ;-)
+
+
+# Pictures of the System Results
+
+![13 09 2021_00 21 19_REC](https://user-images.githubusercontent.com/53901834/133006106-3f679353-f95b-47bb-82eb-a33bd05cbb15.png)
+
+![13 09 2021_00 21 51_REC](https://user-images.githubusercontent.com/53901834/133006108-20f349a0-f797-4265-af78-9a90ccb52b99.png)
+
+![13 09 2021_00 22 14_REC](https://user-images.githubusercontent.com/53901834/133006109-22d968b5-f47a-456d-a324-ff3f0fc4e876.png)
+
